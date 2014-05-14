@@ -1,0 +1,16 @@
+/build.xml
+/build
+/dist
+/nbproject
+/src
+/maraya-war/build.xml
+/maraya-war/build
+/maraya-war/dist
+/maraya-war/nbproject
+/maraya-war/web/WEB-INF
+/maraya-war/src/conf
+/maraya-ejb/build.xml
+/maraya-ejb/build
+/maraya-ejb/dist
+/maraya-ejb/nbproject
+/maraya-ejb/src/conf
