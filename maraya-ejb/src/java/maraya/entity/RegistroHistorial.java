@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RegistroHistorial.findAll", query = "SELECT r FROM RegistroHistorial r"),
-    @NamedQuery(name = "RegistroHistorial.findById", query = "SELECT r FROM RegistroHistorial r WHERE r.id = :id"),
+    @NamedQuery(name = "RegistroHistorial.findByHistorial", query= "SELECT r FROM RegistroHistorial r Where r.historial = :historial"),
+	@NamedQuery(name = "RegistroHistorial.findById", query = "SELECT r FROM RegistroHistorial r WHERE r.id = :id"),
     @NamedQuery(name = "RegistroHistorial.findByContenido", query = "SELECT r FROM RegistroHistorial r WHERE r.contenido = :contenido"),
     @NamedQuery(name = "RegistroHistorial.findByFechaCreacion", query = "SELECT r FROM RegistroHistorial r WHERE r.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "RegistroHistorial.findByFechaModificacion", query = "SELECT r FROM RegistroHistorial r WHERE r.fechaModificacion = :fechaModificacion")})

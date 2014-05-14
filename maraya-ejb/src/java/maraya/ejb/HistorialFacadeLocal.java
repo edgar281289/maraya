@@ -31,4 +31,5 @@ public interface HistorialFacadeLocal {
 
     int count();
     
+	public List<Historial> buscarHistorial(Long id);
 }

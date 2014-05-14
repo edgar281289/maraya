@@ -6,6 +6,7 @@
 
 package maraya.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +30,10 @@ public class UsuariosPacientesFacade extends AbstractFacade<UsuariosPacientes> i
         super(UsuariosPacientes.class);
     }
     
+    public List<UsuariosPacientes> login(String usuario, String password){
+        return em.createNamedQuery("UsuariosPacientes.findByUserAndPassword")
+                .setParameter("user", usuario)
+                .setParameter("password", password)
+                .getResultList();
+    }
 }

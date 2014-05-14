@@ -6,6 +6,7 @@
 
 package maraya.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +30,9 @@ public class HistorialFacade extends AbstractFacade<Historial> implements Histor
         super(Historial.class);
     }
     
+    public List<Historial> buscarHistorial(Long id){
+        return em.createNamedQuery("Historial.findById")
+                .setParameter("id", id)
+                .getResultList();
+    }
 }

@@ -29,4 +29,7 @@ public class PacienteFacade extends AbstractFacade<Paciente> implements Paciente
         super(Paciente.class);
     }
     
+	    public Paciente PacienteByNss(String nssPaciente) {
+        return (Paciente)em.createNamedQuery("Paciente.findByNss").setParameter("nss", nssPaciente).getSingleResult();
+    }
 }

@@ -9,6 +9,7 @@ package maraya.ejb;
 import java.util.List;
 import javax.ejb.Local;
 import maraya.entity.Gruposmedicos;
+import maraya.entity.Medicos;
 
 /**
  *
@@ -31,4 +32,5 @@ public interface GruposmedicosFacadeLocal {
 
     int count();
     
+    public List<Gruposmedicos> buscarPacientes(Medicos medico);
 }

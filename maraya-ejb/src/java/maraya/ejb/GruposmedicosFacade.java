@@ -6,10 +6,12 @@
 
 package maraya.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import maraya.entity.Gruposmedicos;
+import maraya.entity.Medicos;
 
 /**
  *
@@ -29,4 +31,11 @@ public class GruposmedicosFacade extends AbstractFacade<Gruposmedicos> implement
         super(Gruposmedicos.class);
     }
     
+    @Override
+    public List<Gruposmedicos> buscarPacientes(Medicos medico){
+        return em.createNamedQuery("Gruposmedicos.findAllPacientes")
+                .setParameter("medico1", medico)
+                .getResultList();
+    }
+
 }

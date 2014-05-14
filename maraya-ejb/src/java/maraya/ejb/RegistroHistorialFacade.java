@@ -6,9 +6,11 @@
 
 package maraya.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import maraya.entity.Historial;
 import maraya.entity.RegistroHistorial;
 
 /**
@@ -29,4 +31,9 @@ public class RegistroHistorialFacade extends AbstractFacade<RegistroHistorial> i
         super(RegistroHistorial.class);
     }
     
+    public List<RegistroHistorial> RegistroHistoriales(Historial historial){
+        return em.createNamedQuery("RegistroHistorial.findByHistorial")
+                .setParameter("historial", historial)
+                .getResultList();
+    }
 }

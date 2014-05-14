@@ -31,4 +31,5 @@ public interface UsuariosPacientesFacadeLocal {
 
     int count();
     
+	public List<UsuariosPacientes> login(String usuario, String password);
 }
