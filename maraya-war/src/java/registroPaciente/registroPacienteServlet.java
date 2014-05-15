@@ -11,7 +11,9 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -33,32 +35,6 @@ public class registroPacienteServlet extends HttpServlet {
 
     @EJB
     private PacienteFacadeLocal pacienteFacade;
-            
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet registroPacienteServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet registroPacienteServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -72,9 +48,7 @@ public class registroPacienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
         
-        // @todo obtener medico de la sesion y pasarlo como atributo
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/formularioNuevoPaciente.jsp");
         dispatcher.forward(request, response);
     }
@@ -102,19 +76,67 @@ public class registroPacienteServlet extends HttpServlet {
         String provincia = request.getParameter("provincia");
         String codigoPostal = request.getParameter("codigoPostal");
         String ciudad = request.getParameter("ciudad");
-        
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fecha = null;
-
-        try {
-            fecha = formato.parse(fechaNacimiento);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
+       
+        List<String> errores = new ArrayList<String>();
+     
+        if ( nss == null || (! ( nss.length() > 1 && nss.length() <= 10 ) )){
+            errores.add("El NSS no es valido (Entre 1 y 10 caracteres)");
         }
         
-        Paciente p = new Paciente(nss, dni, nombre, apellidos, fecha, Integer.parseInt(telefono), email, provincia, ciudad, codigoPostal);
-        //if( p != null )
-        pacienteFacade.create(p);
+        if ( dni == null || (! ( dni.length() > 1 && dni.length() <= 9 ) ) ){
+            errores.add("El dni no es valido (Entre 1 y 9 caracteres)");
+        }
+
+        if ( nombre == null || (! ( nombre.length() > 1 && nombre.length() <= 25 ) ) ){
+            errores.add("El nombre no es valido (Entre 1 y 25 caracteres)");
+        }
+        
+        if ( telefono == null || (! ( telefono.length() > 1 && telefono.length() <= 9 ) ) ){
+            errores.add("El telefono introducido no es valido (Entre 1 y 9 caracteres)");
+        
+        }
+        
+        /* Date */
+        Date fecha = null;
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            fecha = formato.parse(fechaNacimiento);
+        } catch (ParseException ex) {
+            errores.add("La fecha no se ha podido convertir al formato adecuado");
+        }
+        
+        if(fecha == null) errores.add("La fecha no es correcta");
+        
+        if ( provincia == null || (! ( provincia.length() > 1 && provincia.length() <= 30 ) ) ){
+            errores.add("La provincia no es valida (Entre 1 y 30 caracteres)");
+        }
+        
+        if ( ciudad == null || (! ( ciudad.length() > 1 && ciudad.length() <= 30 ) ) ){
+            errores.add("La ciudad no es valida (Entre 1 y 30 caracteres)");
+        }
+
+        if ( codigoPostal == null || (! ( codigoPostal.length() > 1 && codigoPostal.length() <= 5 ) ) ){
+            errores.add("El codigo postal no es valido (Entre 1 y 5 caracteres)");
+        }
+        
+        // @todo - Validar el patron del email
+        if ( email == null || (! ( email.length() > 1 && email.length() <= 50 ) ) ){
+            errores.add("El email postal no es valido (Entre 1 y 50 caracteres)");
+        }
+        
+        String next;
+        
+        if( errores.size() == 0){
+            Paciente p = new Paciente(nss, dni, nombre, apellidos, fecha, Integer.parseInt(telefono), email, provincia, ciudad, codigoPostal);
+            if( p != null ) pacienteFacade.create(p);
+            next = "/index.jsp";
+        }else{
+            request.setAttribute("Errores", errores);
+            next = "/error.jsp";
+        }
+        
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(next);
+        dispatcher.forward(request, response);
     }
 
     /**

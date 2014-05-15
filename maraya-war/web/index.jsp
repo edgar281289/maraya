@@ -20,10 +20,8 @@ and open the template in the editor.
             Object user = null;
             user = miSesion.getAttribute("usuario");
             
-            //out.println("Tipo: " + (String)miSesion.getAttribute("tipoUsuario") + "<br>");
-            
             if(user == null){
-                //out.println("El usuario aun no esta identificado");
+            
                 %>
                 <div>
                     <a href='loginUsuario.jsp'> Login de usuario</a>

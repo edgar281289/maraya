@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ConsultarHistorial;
 
 import java.io.IOException;
@@ -51,7 +50,7 @@ public class HistorialPacienteServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HistorialPaciente</title>");            
+            out.println("<title>Servlet HistorialPaciente</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HistorialPaciente at " + request.getContextPath() + "</h1>");
@@ -72,33 +71,27 @@ public class HistorialPacienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            HttpSession miSesion = request.getSession(true);    
-            UsuariosPacientes user =null;
-            user = (UsuariosPacientes) miSesion.getAttribute("usuario");
-            
-            PrintWriter out = response.getWriter();
-            out.println("HOLA=¿?");
-            //System.exit(0);
-            
-            if (user == null) {
-                miSesion.invalidate();
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-                dispatcher.forward(request, response);
-            }else{
-                Paciente paciente = user.getPaciente();
-                 Historial historial = paciente.getHistorial();
+        HttpSession miSesion = request.getSession(true);
+        UsuariosPacientes user = null;
+        user = (UsuariosPacientes) miSesion.getAttribute("usuario");
 
-                 List <RegistroHistorial> listaRegistroHistorial = registroHistorialFacade.RegistroHistoriales(historial);
-                 
-                 request.setAttribute("ListaRegistrosHistorial", listaRegistroHistorial);
-                 request.setAttribute("Paciente", paciente);
-                 request.setAttribute("Historial", historial);
-                 
-               RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/historialPaciente.jsp");
-               dispatcher.forward(request, response);
+        if (user == null) {
+            miSesion.invalidate();
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            Paciente paciente = user.getPaciente();
+            Historial historial = paciente.getHistorial();
 
-            }
-            
+            List<RegistroHistorial> listaRegistroHistorial = registroHistorialFacade.RegistroHistoriales(historial);
+
+            request.setAttribute("ListaRegistrosHistorial", listaRegistroHistorial);
+            request.setAttribute("Paciente", paciente);
+            request.setAttribute("Historial", historial);
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/historialPaciente.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     /**
