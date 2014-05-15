@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package maraya.ejb;
 
 import java.util.List;
@@ -18,6 +17,7 @@ import maraya.entity.Historial;
  */
 @Stateless
 public class HistorialFacade extends AbstractFacade<Historial> implements HistorialFacadeLocal {
+
     @PersistenceContext(unitName = "maraya-ejbPU")
     private EntityManager em;
 
@@ -29,8 +29,8 @@ public class HistorialFacade extends AbstractFacade<Historial> implements Histor
     public HistorialFacade() {
         super(Historial.class);
     }
-    
-    public List<Historial> buscarHistorial(Long id){
+
+    public List<Historial> buscarHistorial(Long id) {
         return em.createNamedQuery("Historial.findById")
                 .setParameter("id", id)
                 .getResultList();

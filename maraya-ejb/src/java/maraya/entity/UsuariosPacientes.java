@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "UsuariosPacientes.findAll", query = "SELECT u FROM UsuariosPacientes u"),
     @NamedQuery(name = "UsuariosPacientes.findById", query = "SELECT u FROM UsuariosPacientes u WHERE u.id = :id"),
     @NamedQuery(name = "UsuariosPacientes.findByUser", query = "SELECT u FROM UsuariosPacientes u WHERE u.user = :user"),
-    @NamedQuery(name = "UsuariosPacientes.findByPassword", query = "SELECT u FROM UsuariosPacientes u WHERE u.password = :password")
-    ,@NamedQuery(name = "UsuariosPacientes.findByUserAndPassword", query = "SELECT u FROM UsuariosPacientes u WHERE u.user = :user AND u.password = :password")
+    @NamedQuery(name = "UsuariosPacientes.findByPassword", query = "SELECT u FROM UsuariosPacientes u WHERE u.password = :password"),
+    @NamedQuery(name = "UsuariosPacientes.findByUserAndPassword", query = "SELECT u FROM UsuariosPacientes u WHERE u.user = :user AND u.password = :password")
 })
 public class UsuariosPacientes implements Serializable {
     private static final long serialVersionUID = 1L;

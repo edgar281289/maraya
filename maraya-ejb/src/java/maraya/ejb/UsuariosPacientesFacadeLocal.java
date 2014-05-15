@@ -30,6 +30,7 @@ public interface UsuariosPacientesFacadeLocal {
     List<UsuariosPacientes> findRange(int[] range);
 
     int count();
+	
+    public List<UsuariosPacientes> login(String usuario, String password);
     
-	public List<UsuariosPacientes> login(String usuario, String password);
 }

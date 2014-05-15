@@ -31,9 +31,9 @@ public class UsuariosMedicosFacade extends AbstractFacade<UsuariosMedicos> imple
     }
     
     public List<UsuariosMedicos> login(String usuario, String password){
-        return em.createNamedQuery("UsuariosMedicos.findByUserAndPassword")
-                .setParameter("user", usuario)
-                .setParameter("password", password)
-                .getResultList();
+            return em.createNamedQuery("UsuariosMedicos.findByUserAndPassword")
+                    .setParameter("user", usuario)
+                    .setParameter("password", password)
+                    .getResultList();
     }
 }

@@ -31,6 +31,7 @@ public interface GruposmedicosFacadeLocal {
     List<Gruposmedicos> findRange(int[] range);
 
     int count();
-    
+	
     public List<Gruposmedicos> buscarPacientes(Medicos medico);
+    
 }

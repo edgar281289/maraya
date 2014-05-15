@@ -31,9 +31,9 @@ public class UsuariosPacientesFacade extends AbstractFacade<UsuariosPacientes> i
     }
     
     public List<UsuariosPacientes> login(String usuario, String password){
-        return em.createNamedQuery("UsuariosPacientes.findByUserAndPassword")
-                .setParameter("user", usuario)
-                .setParameter("password", password)
-                .getResultList();
+            return em.createNamedQuery("UsuariosPacientes.findByUserAndPassword")
+                    .setParameter("user", usuario)
+                    .setParameter("password", password)
+                    .getResultList();
     }
 }

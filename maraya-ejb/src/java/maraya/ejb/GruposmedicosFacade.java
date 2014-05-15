@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package maraya.ejb;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import maraya.entity.Medicos;
  */
 @Stateless
 public class GruposmedicosFacade extends AbstractFacade<Gruposmedicos> implements GruposmedicosFacadeLocal {
+
     @PersistenceContext(unitName = "maraya-ejbPU")
     private EntityManager em;
 
@@ -30,12 +30,11 @@ public class GruposmedicosFacade extends AbstractFacade<Gruposmedicos> implement
     public GruposmedicosFacade() {
         super(Gruposmedicos.class);
     }
-    
+
     @Override
-    public List<Gruposmedicos> buscarPacientes(Medicos medico){
+    public List<Gruposmedicos> buscarPacientes(Medicos medico) {
         return em.createNamedQuery("Gruposmedicos.findAllPacientes")
                 .setParameter("medico1", medico)
                 .getResultList();
     }
-
 }

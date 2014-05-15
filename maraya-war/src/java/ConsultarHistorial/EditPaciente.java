@@ -117,7 +117,7 @@ public class EditPaciente extends HttpServlet {
         }else{
            String tipo = (String)sesion.getAttribute("tipoUsuario");
             if(tipo.equals("medico")){
-                int id = Integer.parseInt(request.getParameter("ID"));
+                long id = Long.parseLong(request.getParameter("ID"));
                 RegistroHistorial registro = facade.find(id);
                 UsuariosMedicos med = (UsuariosMedicos)sesion.getAttribute("usuario");
                 String contenido = request.getParameter("textarea");

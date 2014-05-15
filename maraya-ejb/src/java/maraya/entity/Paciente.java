@@ -69,11 +69,15 @@ public class Paciente implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "apellidos")
     private String apellidos;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "telefono")
-    private Integer telefono;
+    private int telefono;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Correo electrónico no válido")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -114,11 +118,13 @@ public class Paciente implements Serializable {
         this.nss = nss;
     }
 
-    public Paciente(String nss, String dni, String nombre, String apellidos, String email, String provincia, String ciudad, String codigoPostal) {
+    public Paciente(String nss, String dni, String nombre, String apellidos, Date fechaNacimiento, int telefono, String email, String provincia, String ciudad, String codigoPostal) {
         this.nss = nss;
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
         this.email = email;
         this.provincia = provincia;
         this.ciudad = ciudad;
@@ -165,11 +171,11 @@ public class Paciente implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Integer getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 

@@ -31,5 +31,5 @@ public interface UsuariosMedicosFacadeLocal {
 
     int count();
     
-    public List<UsuariosMedicos> login(String usuario, String password);
+	public List<UsuariosMedicos> login(String usuario, String password);
 }

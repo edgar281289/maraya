@@ -31,7 +31,7 @@ public class RegistroHistorialFacade extends AbstractFacade<RegistroHistorial> i
         super(RegistroHistorial.class);
     }
     
-    public List<RegistroHistorial> RegistroHistoriales(Historial historial){
+    public List<RegistroHistorial> RegistroHistoriales(Historial historial) {
         return em.createNamedQuery("RegistroHistorial.findByHistorial")
                 .setParameter("historial", historial)
                 .getResultList();
