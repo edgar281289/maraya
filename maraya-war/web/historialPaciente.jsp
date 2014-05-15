@@ -20,9 +20,8 @@
             List <RegistroHistorial> listRegistroHistorial = (List<RegistroHistorial>) request.getAttribute("ListaRegistrosHistorial");
             Historial historial = (Historial) request.getAttribute("Historial");
             Paciente paciente = (Paciente) request.getAttribute("Paciente");
-            
         %>
-        <h1><p align=="Center">Historial Clinico De <%= paciente.getNombre() +" " + paciente.getApellidos() %></p></h1>
+        <h1>Historial Clinico De <%= paciente.getNombre() +" " + paciente.getApellidos() %></h1>
        
         
         <p>
@@ -57,11 +56,8 @@
                 <td><%= r.getFechaCreacion() %> </td>
                 <td><%= r.getFechaModificacion() %></td>
             </tr>
-            <% }
-                    %>
+            <% } %>
         </table>
-
-             <a href='index.jsp'> Volver</a>
-               
+        <a href='index.jsp'> Volver</a>
     </body>
 </html>

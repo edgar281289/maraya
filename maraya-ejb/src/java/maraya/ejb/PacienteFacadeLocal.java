@@ -31,5 +31,5 @@ public interface PacienteFacadeLocal {
 
     int count();
     
-	public Paciente PacienteByNss(String nssPaciente);
+    public Paciente PacienteByNss(String nssPaciente);
 }

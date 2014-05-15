@@ -4,12 +4,16 @@
  * and open the template in the editor.
  */
 
-package ConsultarHistorial;
+package registroPaciente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,22 +21,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import maraya.ejb.RegistroHistorialFacadeLocal;
-import maraya.entity.UsuariosPacientes;
-import maraya.entity.Historial;
-
+import maraya.ejb.PacienteFacadeLocal;
 import maraya.entity.Paciente;
-import maraya.entity.RegistroHistorial;
+
 /**
  *
- * @author Pulgy
+ * @author Portatil
  */
-@WebServlet(name = "HistorialPaciente", urlPatterns = {"/HistorialPaciente"})
-public class HistorialPacienteServlet extends HttpServlet {
-    @EJB
-    private RegistroHistorialFacadeLocal registroHistorialFacade;
+@WebServlet(name = "registroPacienteServlet", urlPatterns = {"/registroPaciente"})
+public class registroPacienteServlet extends HttpServlet {
 
+    @EJB
+    private PacienteFacadeLocal pacienteFacade;
+            
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,10 +51,10 @@ public class HistorialPacienteServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HistorialPaciente</title>");            
+            out.println("<title>Servlet registroPacienteServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HistorialPaciente at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet registroPacienteServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,28 +72,11 @@ public class HistorialPacienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            HttpSession miSesion = request.getSession(true);    
-            UsuariosPacientes user =null;
-            user = (UsuariosPacientes) miSesion.getAttribute("usuario");
-            if (user == null) {
-                miSesion.invalidate();
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-                dispatcher.forward(request, response);
-            }else{
-                Paciente paciente = user.getPaciente();
-                 Historial historial = paciente.getHistorial();
-
-                 List <RegistroHistorial> listaRegistroHistorial = registroHistorialFacade.RegistroHistoriales(historial);
-                 
-                 request.setAttribute("ListaRegistrosHistorial", listaRegistroHistorial);
-                 request.setAttribute("Paciente", paciente);
-                 request.setAttribute("Historial", historial);
-                 
-               RequestDispatcher dispatcher = request.getRequestDispatcher("/HistorialPaciente.jsp");
-               dispatcher.forward(request, response);
-                 
-            }
-            
+        //processRequest(request, response);
+        
+        // @todo obtener medico de la sesion y pasarlo como atributo
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/formularioNuevoPaciente.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -106,7 +90,45 @@ public class HistorialPacienteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        
+        String nombre = request.getParameter("nombre");
+        String apellidos = request.getParameter("apellidos");
+        String dni = request.getParameter("dni");
+        String nss = request.getParameter("nss");
+        String telefono = request.getParameter("telefono");
+        String email = request.getParameter("email");
+        String fechaNacimiento = request.getParameter("fechaNacimiento");
+        String provincia = request.getParameter("provincia");
+        String codigoPostal = request.getParameter("codigoPostal");
+        String ciudad = request.getParameter("ciudad");
+        
+        Paciente p = new Paciente();
+        
+        p.setNss(nss);
+        p.setNombre(nombre);       
+        p.setProvincia(provincia);
+        p.setApellidos(apellidos);
+        p.setCodigoPostal(codigoPostal);
+        p.setEmail(email);
+        p.setCiudad(ciudad);
+        p.setDni(dni);
+        p.setFechaNacimiento(new Date());
+        p.setTelefono(Integer.parseInt(telefono));
+        
+        PrintWriter out = response.getWriter();
+        out.println(p.getNss());
+        out.println(p.getNombre());
+        out.println(p.getApellidos());
+        out.println(p.getNss());
+        out.println(p.getCodigoPostal());
+        out.println(p.getEmail());
+        out.println(p.getCiudad());
+        out.println(p.getDni());
+        out.println(p.getTelefono());
+        
+        //pacienteFacade.create(p);
+        
     }
 
     /**

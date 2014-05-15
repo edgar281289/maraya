@@ -48,7 +48,7 @@ public class RegistrosPaciente extends HttpServlet {
         if(!pacienteHistorial.equals(null)){
             lsRegistros = new ArrayList(pacienteHistorial.getRegistroHistorialCollection());
             request.setAttribute("listaRegistros", lsRegistros);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("MostrarRegistros.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/MostrarRegistros.jsp");
                 dispatcher.forward(request, response);
         }else
         {

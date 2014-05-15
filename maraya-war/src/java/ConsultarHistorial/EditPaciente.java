@@ -17,11 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import maraya.ejb.PacienteFacadeLocal;
 import maraya.ejb.RegistroHistorialFacadeLocal;
-import maraya.entity.Historial;
-import maraya.entity.Medicos;
-import maraya.entity.Paciente;
 import maraya.entity.RegistroHistorial;
 import maraya.entity.UsuariosMedicos;
 
@@ -82,9 +78,9 @@ public class EditPaciente extends HttpServlet {
            // UsuariosMedicos medico = (UsuariosMedicos)sesion.getAttribute("usuario");
             String tipo = (String)sesion.getAttribute("tipoUsuario");
         if(tipo.equals("medico")){
-                int idRegistro =  Integer.parseInt(request.getParameter("Historial"));
+                long idRegistro =  Long.parseLong(request.getParameter("Historial"));
                 
-                System.out.println(idRegistro);
+                //System.out.println(idRegistro);
                 RegistroHistorial Registro = facade.find(idRegistro);
                 request.setAttribute("Registro", Registro);
                 request.setAttribute("ID", idRegistro);

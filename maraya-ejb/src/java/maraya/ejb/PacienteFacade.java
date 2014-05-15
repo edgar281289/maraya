@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package maraya.ejb;
 
 import javax.ejb.Stateless;
@@ -17,6 +16,7 @@ import maraya.entity.Paciente;
  */
 @Stateless
 public class PacienteFacade extends AbstractFacade<Paciente> implements PacienteFacadeLocal {
+
     @PersistenceContext(unitName = "maraya-ejbPU")
     private EntityManager em;
 
@@ -28,8 +28,8 @@ public class PacienteFacade extends AbstractFacade<Paciente> implements Paciente
     public PacienteFacade() {
         super(Paciente.class);
     }
-    
-	    public Paciente PacienteByNss(String nssPaciente) {
-        return (Paciente)em.createNamedQuery("Paciente.findByNss").setParameter("nss", nssPaciente).getSingleResult();
+
+    public Paciente PacienteByNss(String nssPaciente) {
+        return (Paciente) em.createNamedQuery("Paciente.findByNss").setParameter("nss", nssPaciente).getSingleResult();
     }
 }

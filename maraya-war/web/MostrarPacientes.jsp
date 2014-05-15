@@ -19,7 +19,6 @@
            List<Paciente> lsPacientes = (List<Paciente>) request.getAttribute("listaPacientes");
            Historial historial;
         %>
-        
         <table border="10">
             <caption> Pacientes</caption>
 		<tr>
@@ -27,7 +26,7 @@
                         <th>Nombre</th>
 			<th>Apellidos</th>
                         <th>Historial</th>
-                        <th>Fecha del Historial</th>>
+                        <th>Fecha del Historial</th>
 		</tr>
                 <%
                     for(Paciente p : lsPacientes){
@@ -41,9 +40,7 @@
                         <td><%= historial.getFechaCreacion() %></td>
                         <td><a href= "RegistrosPaciente?historial=<%= historial.getId() %>"> Leer Registros del paciente </a></td>
                 </tr>
-                <%
-                    }
-                %>
+                <% } %>
         </table>
         <a href='index.jsp'> Volver </a>
     </body>

@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import maraya.ejb.UsuariosMedicosFacadeLocal;
 import maraya.entity.UsuariosMedicos;
-import maraya.entity.UsuariosPacientes;
 
 /**
  *

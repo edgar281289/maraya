@@ -9,7 +9,6 @@ package maraya.ejb;
 import java.util.List;
 import javax.ejb.Local;
 import maraya.entity.Historial;
-import maraya.entity.Medicos;
 import maraya.entity.RegistroHistorial;
 
 /**

@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import maraya.ejb.GruposmedicosFacadeLocal;
-import maraya.ejb.PacienteFacadeLocal;
-import maraya.ejb.UsuariosPacientesFacadeLocal;
 import maraya.entity.Gruposmedicos;
 import maraya.entity.Medicos;
 import maraya.entity.Paciente;
@@ -58,8 +56,8 @@ public class ConsultarHistorialMedico extends HttpServlet {
         try {
 
             if (tipoUser == "medico") {
-                Medicos medico = user.getMedico();
-
+                Medicos medico = user.getMedico();                
+                
                 List<Gruposmedicos> lsGrupos = null;
                 List<Paciente> lsPacientes = new ArrayList<Paciente>();
                 lsGrupos = gruposMedicosFacade.buscarPacientes(medico);
@@ -69,7 +67,7 @@ public class ConsultarHistorialMedico extends HttpServlet {
                 }
 
                 request.setAttribute("listaPacientes", lsPacientes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("MostrarPacientes.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/MostrarPacientes.jsp");
                 dispatcher.forward(request, response);
             } else {
                 out.println("<h1>No tienes permisos para ver el historial </h1>");

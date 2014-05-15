@@ -14,9 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <%
-            ArrayList<RegistroHistorial> lsRegistros = (ArrayList<RegistroHistorial>) request.getAttribute("listaRegistros");
-         %>
+        <% ArrayList<RegistroHistorial> lsRegistros = (ArrayList<RegistroHistorial>) request.getAttribute("listaRegistros"); %>
         <table border="10">
             <caption> Registros</caption>
 		<tr>
@@ -41,7 +39,7 @@
                     }
                 %>                
          </table>
-          <a href="<%= request.getContextPath()%>/ConsultarHistorialesMedicos"> Volver </a>
+          <a href="ConsultarHistorialesMedicos"> Volver </a>
           
          
     </body>

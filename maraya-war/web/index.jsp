@@ -42,6 +42,8 @@ and open the template in the editor.
                 }else if(tipoUser == "medico"){
                     %>
                     <a href='ConsultarHistorialesMedicos'> Consultar historiales de los pacientes </a>
+                    <br>
+                    <a href='registroPaciente'> Registrar nuevo paciente</a>
                     <%
                 }
                 
@@ -49,9 +51,7 @@ and open the template in the editor.
                 <br>
                 <a href='Logout'> Logout </a> 
                 <%
-                
-                //out.println("Hola, " + user.getUser());
-                //out.println("<a href='Logout'> Logout </a>");
+
             }
         %>
     </body>
